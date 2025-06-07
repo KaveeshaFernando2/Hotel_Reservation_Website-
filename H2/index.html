@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SL Hotels</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="hero">
+    <nav class="navbar">
+      <!-- <div class="logo">
+        
+        <img src="https://cdn-icons-png.flaticon.com/512/743/743008.png" alt="SL Hotels Logo" />
+        <span>SL Hotels</span>
+      </div> -->
+
+      <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/235/235889.png" alt="SL Hotels Logo" />
+      <span>SL Hotels</span>
+        </div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#" class="register-btn">Register</a></li>
+        
+    </ul>
+    </nav>
+<!-- hero section -->
+    <div class="hero-content">
+      <h1>Experience Luxury in the<br>Heart of Sri Lanka</h1>
+      <p>
+        Discover our premium accommodations with breathtaking views and exceptional service. Your perfect stay awaits.
+      </p>
+      <div class="cta-buttons">
+        <a href="#" class="btn primary">Browse Rooms</a>
+        <a href="#" class="btn secondary">Learn More</a>
+      </div>
+    </div>
+<div style="margin-top: 100px;"></div>
+
+
+<!-- Rooms -->
+<div class="container">
+    <header class="page-header">
+      <h1>Our Rooms</h1>
+      <p>Discover our collection of elegantly designed rooms and suites, each offering the perfect blend of comfort, luxury, and Sri Lankan hospitality.</p>
+    </header>
+
+  
+
+        <section class="filters">
+        <h2>
+            <img src="New folder/searchpic.png" class="icon" alt="Search Icon" />
+            Filter Rooms
+        </h2>
+        <div class="filter-grid">
+            <div>
+            <label for="type">Room Type</label>
+            <select id="type">
+                <option value="all">All Types</option>
+                <option value="Standard">Standard</option>
+                <option value="Deluxe">Deluxe</option>
+                <option value="Superior">Superior</option>
+                <option value="Suite">Suite</option>
+                <option value="Family">Family</option>
+                <option value="Residential">Residential</option>
+            </select>
+            </div>
+
+        <div>
+          <label for="capacity">Guests</label>
+          <select id="capacity">
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5+ Guests</option>
+          </select>
+        </div>
+        <div>
+          <label for="minPrice">Min Price (LKR)</label>
+          <input type="range" id="minPrice" min="0" max="100000" step="5000" value="0">
+          <p id="minValue">LKR 0</p>
+        </div>
+        <div>
+          <label for="maxPrice">Max Price (LKR)</label>
+          <input type="range" id="maxPrice" min="0" max="100000" step="5000" value="100000">
+          <p id="maxValue">LKR 100,000</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rooms-grid" id="roomsContainer">
+      <!-- Rooms will be injected by JavaScript -->
+    </section>
+  </div>
+
+
+     <script>
+    const rooms = [
+      { id: '1', name: 'Deluxe Ocean View', type: 'Deluxe', price: 25000, capacity: 2, bathrooms: 1, size: 30, breakfast: true, wifi: true, tv: true, ac: true, description: 'A spacious room with a breathtaking view of the ocean.', image: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg' },
+      { id: '2', name: 'Premium Suite', type: 'Suite', price: 45000, capacity: 4, bathrooms: 2, size: 60, breakfast: true, wifi: true, tv: true, ac: true, description: 'Ultimate luxury experience with a separate living area.', image: 'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg' },
+      { id: '3', name: 'Standard Room', type: 'Standard', price: 15000, capacity: 2, bathrooms: 1, size: 25, breakfast: false, wifi: true, tv: true, ac: true, description: 'Comfortable and affordable with essential amenities.', image: 'https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg' },
+      { id: '4', name: 'Family Room', type: 'Family', price: 32000, capacity: 5, bathrooms: 2, size: 45, breakfast: true, wifi: true, tv: true, ac: true, description: 'Ideal for families with children and multiple beds.', image: 'https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg' },
+      { id: '5', name: 'Residential Suite', type: 'Residential', price: 60000, capacity: 4, bathrooms: 2, size: 80, breakfast: true, wifi: true, tv: true, ac: true, description: 'Long stays with kitchen, lounge and balcony.', image: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg' },
+      { id: '6', name: 'Superior Garden Room', type: 'Superior', price: 28000, capacity: 3, bathrooms: 1, size: 35, breakfast: true, wifi: true, tv: true, ac: true, description: 'Modern room with tropical garden view.', image: 'https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg' },
+      { id: '7', name: 'Economy Single', type: 'Standard', price: 10000, capacity: 1, bathrooms: 1, size: 18, breakfast: false, wifi: true, tv: false, ac: true, description: 'Budget-friendly for solo travelers.', image: 'https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg' },
+      { id: '8', name: 'Honeymoon Suite', type: 'Suite', price: 50000, capacity: 2, bathrooms: 1, size: 50, breakfast: true, wifi: true, tv: true, ac: true, description: 'Romantic setup with jacuzzi.', image: 'https://images.pexels.com/photos/261395/pexels-photo-261395.jpeg' },
+      { id: '9', name: 'Presidential Suite', type: 'Suite', price: 95000, capacity: 4, bathrooms: 3, size: 100, breakfast: true, wifi: true, tv: true, ac: true, description: 'Top luxury experience with VIP service.', image: 'https://images.pexels.com/photos/1457844/pexels-photo-1457844.jpeg' }
+    ];
+
+    const container = document.getElementById("roomsContainer");
+    const typeFilter = document.getElementById("type");
+    const capacityFilter = document.getElementById("capacity");
+    const minPrice = document.getElementById("minPrice");
+    const maxPrice = document.getElementById("maxPrice");
+    const minValue = document.getElementById("minValue");
+    const maxValue = document.getElementById("maxValue");
+
+    function renderRooms() {
+      const type = typeFilter.value;
+      const capacity = parseInt(capacityFilter.value);
+      const min = parseInt(minPrice.value);
+      const max = parseInt(maxPrice.value);
+
+      minValue.textContent = `LKR ${min.toLocaleString()}`;
+      maxValue.textContent = `LKR ${max.toLocaleString()}`;
+
+      const filtered = rooms.filter(r =>
+        (type === "all" || r.type === type) &&
+        r.capacity >= capacity &&
+        r.price >= min &&
+        r.price <= max
+      );
+
+      container.innerHTML = filtered.map(room => `
+        <div class="room-card">
+          <img src="${room.image}" alt="${room.name}">
+          <div class="room-info">
+            <h3>${room.name}</h3>
+            <p>${room.description}</p>
+            <ul>
+              <li><strong>Guests:</strong> ${room.capacity}</li>
+              <li><strong>Bathrooms:</strong> ${room.bathrooms}</li>
+              <li><strong>Size:</strong> ${room.size} m²</li>
+              ${room.breakfast ? "<li>Free Breakfast</li>" : ""}
+            </ul>
+            <div class="price-row">
+              <span class="price">LKR ${room.price.toLocaleString()} / night</span>
+              <a href="#">View Details</a>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<p class="no-results">No rooms match your filters.</p>`;
+      }
+    }
+
+    typeFilter.addEventListener("change", renderRooms);
+    capacityFilter.addEventListener("change", renderRooms);
+    minPrice.addEventListener("input", renderRooms);
+    maxPrice.addEventListener("input", renderRooms);
+
+    window.onload = renderRooms;
+  </script>
+
+
+
+  </header>
+</body>
+</html>
