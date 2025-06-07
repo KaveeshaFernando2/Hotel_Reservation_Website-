@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SL Hotels – Our Rooms</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0; padding: 20px; background: #f9f9f9;
+          background: url('https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center center / cover no-repeat;
+
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .page-header h1 {
+      font-weight: 800;
+      font-size: 2.5rem;
+    }
+    .page-header p {
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #f7f4f4;
+    }
+    .filters {
+      margin-bottom: 30px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    .filters h2 {
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .filters .icon {
+      width: 24px;
+      height: 24px;
+    }
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+    .filter-grid label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    select, input[type=range] {
+      width: 100%;
+      padding: 6px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    #minValue, #maxValue {
+      margin-top: 5px;
+      font-weight: 600;
+    }
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .room-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .room-card img {
+      width: 400px;
+      height: 180px;
+      object-fit: cover;
+    }
+    .room-info {
+      padding: 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .room-info h3 {
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+    .room-info p {
+      flex-grow: 1;
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .room-info ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .room-info ul li {
+      margin-bottom: 4px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .price {
+      font-weight: 700;
+      color: #007bff;
+    }
+    .price-row a {
+      text-decoration: none;
+      background: #007bff;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .price-row a:hover {
+      background: #0056b3;
+    }
+    .no-results {
+      font-size: 1.2rem;
+      text-align: center;
+      color: #888;
+      grid-column: 1/-1;
+    }
+
+ 
+    /* Footer */
+    footer {
+      background-color: #1e293b;
+      color: #060606;
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .footer-column h3 {
+      color: #f39c12;
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin: 6px 0;
+    }
+
+    .footer-column a:hover {
+      color: #f39c12;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .social-icons a {
+      margin: 0 8px;
+      font-size: 16px;
+      color: #f0f0f0;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #f39c12;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+     <nav class="navbar">
+    
+
+      <div class="logo">
+      <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/luxury-hotel-logo-design-template-ac37aa5c02927f6720bc68c71247b69c_screen.jpg?ts=1660122253" alt="SL Hotels Logo" />
+      <span>SL Hotels</span>
+        </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+         <li class="nav-item"><a class="nav-link active" href="reservation.html">Reservation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      
+    </ul>
+    </nav>
+
+  <div class="container">
+    <header class="page-header">
+      <h1>Our Rooms</h1>
+      <p>Discover our collection of elegantly designed rooms and suites, each offering the perfect blend of comfort, luxury, and Sri Lankan hospitality.</p>
+    </header>
+
+    <section class="filters">
+      <h2>
+        <img src="New folder/searchpic.jpg" class="icon" alt="Search Icon" />
+        Filter Rooms
+      </h2>
+      <div class="filter-grid">
+        <div>
+          <label for="type">Room Type</label>
+          <select id="type">
+            <option value="all">All Types</option>
+            <option value="Standard">Standard</option>
+            <option value="Deluxe">Deluxe</option>
+            <option value="Superior">Superior</option>
+            <option value="Suite">Suite</option>
+            <option value="Family">Family</option>
+            <option value="Residential">Residential</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="capacity">Guests</label>
+          <select id="capacity">
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5+ Guests</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="minPrice">Min Price (LKR)</label>
+          <input type="range" id="minPrice" min="0" max="100000" step="5000" value="0" />
+          <p id="minValue">LKR 0</p>
+        </div>
+
+        <div>
+          <label for="maxPrice">Max Price (LKR)</label>
+          <input type="range" id="maxPrice" min="0" max="100000" step="5000" value="100000" />
+          <p id="maxValue">LKR 100,000</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rooms-grid" id="roomsContainer">
+      <!-- Rooms will be injected here by JavaScript -->
+    </section>
+  </div>
+
+  <script>
+    const rooms = [
+      { id: '1', name: 'Deluxe Ocean View', type: 'Deluxe', price: 25000, capacity: 2, bathrooms: 1, size: 30, breakfast: true, wifi: true, tv: true, ac: true, description: 'A spacious room with a breathtaking view of the ocean.', image: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg' },
+      { id: '2', name: 'Premium Suite', type: 'Suite', price: 45000, capacity: 4, bathrooms: 2, size: 60, breakfast: true, wifi: true, tv: true, ac: true, description: 'Ultimate luxury experience with a separate living area.', image: 'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg' },
+      { id: '3', name: 'Standard Room', type: 'Standard', price: 15000, capacity: 2, bathrooms: 1, size: 25, breakfast: false, wifi: true, tv: true, ac: true, description: 'Comfortable and affordable with essential amenities.', image: 'https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg' },
+      { id: '4', name: 'Family Room', type: 'Family', price: 32000, capacity: 5, bathrooms: 2, size: 45, breakfast: true, wifi: true, tv: true, ac: true, description: 'Ideal for families with children and multiple beds.', image: 'https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg' },
+      { id: '5', name: 'Residential Suite', type: 'Residential', price: 60000, capacity: 4, bathrooms: 2, size: 80, breakfast: true, wifi: true, tv: true, ac: true, description: 'Long stays with kitchen, lounge and balcony.', image: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg' },
+      { id: '6', name: 'Superior Garden Room', type: 'Superior', price: 28000, capacity: 3, bathrooms: 1, size: 35, breakfast: true, wifi: true, tv: true, ac: true, description: 'Modern room with tropical garden view.', image: 'https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg' },
+      { id: '7', name: 'Economy Single', type: 'Standard', price: 10000, capacity: 1, bathrooms: 1, size: 18, breakfast: false, wifi: true, tv: false, ac: true, description: 'Budget-friendly for solo travelers.', image: 'https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg' },
+      { id: '8', name: 'Honeymoon Suite', type: 'Suite', price: 50000, capacity: 2, bathrooms: 1, size: 50, breakfast: true, wifi: true, tv: true, ac: true, description: 'Romantic setup with jacuzzi.', image: 'https://images.pexels.com/photos/261395/pexels-photo-261395.jpeg' },
+      { id: '9', name: 'Presidential Suite', type: 'Suite', price: 95000, capacity: 4, bathrooms: 3, size: 100, breakfast: true, wifi: true, tv: true, ac: true, description: 'Top luxury experience with VIP service.', image: 'https://images.pexels.com/photos/1457844/pexels-photo-1457844.jpeg' }
+    ];
+
+    const container = document.getElementById("roomsContainer");
+    const typeFilter = document.getElementById("type");
+    const capacityFilter = document.getElementById("capacity");
+    const minPriceRange = document.getElementById("minPrice");
+    const maxPriceRange = document.getElementById("maxPrice");
+    const minValueText = document.getElementById("minValue");
+    const maxValueText = document.getElementById("maxValue");
+
+    // Update the min/max price labels on input
+    minPriceRange.addEventListener("input", () => {
+      let min = parseInt(minPriceRange.value, 10);
+      let max = parseInt(maxPriceRange.value, 10);
+      if (min > max) {
+        minPriceRange.value = max;
+        min = max;
+      }
+      minValueText.textContent = `LKR ${min.toLocaleString()}`;
+      renderRooms();
+    });
+
+    maxPriceRange.addEventListener("input", () => {
+      let min = parseInt(minPriceRange.value, 10);
+      let max = parseInt(maxPriceRange.value, 10);
+      if (max < min) {
+        maxPriceRange.value = min;
+        max = min;
+      }
+      maxValueText.textContent = `LKR ${max.toLocaleString()}`;
+      renderRooms();
+    });
+
+    // Filter changes
+    typeFilter.addEventListener("change", renderRooms);
+    capacityFilter.addEventListener("change", renderRooms);
+
+    function renderRooms() {
+      container.innerHTML = "";
+      const selectedType = typeFilter.value;
+      const selectedCapacity = parseInt(capacityFilter.value, 10);
+      const minPrice = parseInt(minPriceRange.value, 10);
+      const maxPrice = parseInt(maxPriceRange.value, 10);
+
+      const filteredRooms = rooms.filter(room => {
+        // Type filter
+        if (selectedType !== "all" && room.type !== selectedType) return false;
+
+        // Capacity filter: treat "5+" as 5 or more
+        if (selectedCapacity === 5) {
+          if (room.capacity < 5) return false;
+        } else {
+          if (room.capacity < selectedCapacity) return false;
+        }
+
+        // Price range filter
+        if (room.price < minPrice || room.price > maxPrice) return false;
+
+        return true;
+      });
+
+      if (filteredRooms.length === 0) {
+        container.innerHTML = `<p class="no-results">No rooms found matching the criteria.</p>`;
+        return;
+      }
+
+      for (const room of filteredRooms) {
+        const roomEl = document.createElement("article");
+        roomEl.className = "room-card";
+        roomEl.innerHTML = `
+          <img src="${room.image}" alt="${room.name}" />
+          <div class="room-info">
+            <h3>${room.name}</h3>
+            <p>${room.description}</p>
+            <ul>
+              <li><strong>Type:</strong> ${room.type}</li>
+              <li><strong>Capacity:</strong> ${room.capacity} guest${room.capacity > 1 ? 's' : ''}</li>
+              <li><strong>Bathrooms:</strong> ${room.bathrooms}</li>
+              <li><strong>Size:</strong> ${room.size} m²</li>
+              <li><strong>Amenities:</strong> ${[
+                room.breakfast ? "Breakfast" : null,
+                room.wifi ? "WiFi" : null,
+                room.tv ? "TV" : null,
+                room.ac ? "AC" : null
+              ].filter(Boolean).join(", ")}</li>
+            </ul>
+            <div class="price-row">
+              <span class="price">LKR ${room.price.toLocaleString()}</span>
+              <a href="booking.html?roomId=${room.id}" class="btn-book">View</a>
+            </div>
+          </div>
+    `;
+        container.appendChild(roomEl);
+      }
+    }
+
+    // Initial render
+    renderRooms();
+  </script>
+</body>
+
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>SL Hotels</h3>
+      <p>Experience luxury and comfort with SL Hotels.</p>
+    </div>
+
+    
+
+
+    <!-- Quick Links -->
+    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+      <h3 style="color: #f39c12;">Quick Links</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="index.html" style="color: #ccc; text-decoration: none;">Home</a></li>
+        <li><a href="about.html" style="color: #ccc; text-decoration: none;">About</a></li>
+        <li><a href="rooms.html" style="color: #ccc; text-decoration: none;">Rooms</a></li>
+        <li><a href="services.html" style="color: #ccc; text-decoration: none;">Services</a></li>
+        <li><a href="contact.html" style="color: #ccc; text-decoration: none;">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div style="flex: 1; min-width: 250px; margin-bottom: 20px;">
+      <h3 style="color: #f39c12;">Contact Us</h3>
+      <p><i class="fas fa-map-marker-alt"></i> No. 10, Beach Road, Galle, Sri Lanka</p>
+      <p><i class="fas fa-phone"></i> +94 77 123 4567</p>
+      <p><i class="fas fa-envelope"></i> info@slhotels.lk</p>
+    </div>
+
+    <!-- Social Media -->
+    <div style="flex: 1 1 100%; text-align: center; margin-top: 20px;">
+      <a href="#" style="color: #1219e5; margin: 0 10px;"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" style="color: #386ace; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+      <a href="#" style="color: #ec0f0f; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+      <a href="#" style="color: #fff; margin: 0 10px;"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding-top: 20px; color: #aaa; font-size: 14px;">
+    <p>&copy; 2025 SL Hotels. All rights reserved.</p>
+  </div>
+</footer>
+</html>
