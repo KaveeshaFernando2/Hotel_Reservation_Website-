@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SL Hotels Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #d3dde1, #aebfc5, #8879ea);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+      background: transparent;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #050505;
+}
+
+.logo img {
+  width: 78px;
+  height: 78px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: #040404;
+  text-decoration: none;
+  font-weight: 1000;
+}
+
+    .container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1e40af;
+    }
+
+    .login-box label {
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .login-box button {
+      margin-top: 25px;
+      width: 100%;
+      background-color: #1e40af;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #153e99;
+    }
+
+    .demo-accounts {
+      margin-top: 30px;
+      background-color: #f0f4ff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #1e40af;
+    }
+
+    .demo-accounts p {
+      margin: 6px 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1e293b;
+      color: #ccc;
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .footer-column h3 {
+      color: #f39c12;
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin: 6px 0;
+    }
+
+    .footer-column a:hover {
+      color: #f39c12;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .social-icons a {
+      margin: 0 8px;
+      font-size: 16px;
+      color: #f0f0f0;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #f39c12;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    
+
+      <div class="logo">
+      <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/luxury-hotel-logo-design-template-ac37aa5c02927f6720bc68c71247b69c_screen.jpg?ts=1660122253" alt="SL Hotels Logo" />
+ <span>SL Hotels</span>
+        </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="#" class="register-btn">Register</a></li>
+        
+    </ul>
+    </nav>
+
+  <div class="container">
+    <div class="login-box">
+      <h2>Login to SL Hotels</h2>
+      <form id="loginForm">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+
+        <button type="submit">Sign In</button>
+      </form>
+
+      <div class="demo-accounts">
+        <h4>Demo Logins</h4>
+        <p><strong>Admin:</strong> admin@example.com / admin123</p>
+        <p><strong>Customer:</strong> customer@example.com / cust123</p>
+        <p><strong>Clerk:</strong> clerk@example.com / clerk123</p>
+        <p><strong>Travel Agency:</strong> agency@example.com / travel456</p>
+      </div>
+    </div>
+  </div>
+
+  
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>SL Hotels</h3>
+      <p>Experience luxury and comfort with SL Hotels.</p>
+    </div>
+
+    
+
+
+    <!-- Quick Links -->
+    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+      <h3 style="color: #f39c12;">Quick Links</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="index.html" style="color: #ccc; text-decoration: none;">Home</a></li>
+        <li><a href="about.html" style="color: #ccc; text-decoration: none;">About</a></li>
+        <li><a href="rooms.html" style="color: #ccc; text-decoration: none;">Rooms</a></li>
+        <li><a href="services.html" style="color: #ccc; text-decoration: none;">Services</a></li>
+        <li><a href="contact.html" style="color: #ccc; text-decoration: none;">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div style="flex: 1; min-width: 250px; margin-bottom: 20px;">
+      <h3 style="color: #f39c12;">Contact Us</h3>
+      <p><i class="fas fa-map-marker-alt"></i> No. 10, Beach Road, Galle, Sri Lanka</p>
+      <p><i class="fas fa-phone"></i> +94 77 123 4567</p>
+      <p><i class="fas fa-envelope"></i> info@slhotels.lk</p>
+    </div>
+
+    <!-- Social Media -->
+    <div style="flex: 1 1 100%; text-align: center; margin-top: 20px;">
+      <a href="#" style="color: #1219e5; margin: 0 10px;"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" style="color: #386ace; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+      <a href="#" style="color: #ec0f0f; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+      <a href="#" style="color: #fff; margin: 0 10px;"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding-top: 20px; color: #aaa; font-size: 14px;">
+    <p>&copy; 2025 SL Hotels. All rights reserved.</p>
+  </div>
+</footer>
+
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const users = [
+        { email: 'admin@example.com', password: 'admin123' },
+        { email: 'customer@example.com', password: 'cust123' },
+        { email: 'clerk@example.com', password: 'clerk123' },
+        { email: 'agency@example.com', password: 'travel456' }
+      ];
+
+      const match = users.find(user => user.email === email && user.password === password);
+
+      if (match) {
+        alert(`✅ Login successful as ${email}`);
+        // You can redirect to the role-based dashboard here
+        window.location.href = "dashboard.html";
+      } else {
+        alert('❌ Invalid email or password!');
+      }
+    });
+  </script>
+</body>
+</html>
