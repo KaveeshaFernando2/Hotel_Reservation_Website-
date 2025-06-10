@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager Reports</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f0f4f8;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .sidebar {
+            width: 220px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        .dark-mode {
+            background-color: #1e1e1e;
+            color: #ddd;
+        }
+        .dark-mode .card {
+            background: #2c2c2c;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>🏨 Hotel Manager</h2>
+        <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+        <br><br>
+        <h3>Financial Report</h3>
+        <label>Start Date: <input type="date" id="startDate"></label>
+        <label>End Date: <input type="date" id="endDate"></label>
+        <button onclick="loadFinancial()">Load Financial Report</button>
+        <button onclick="downloadPDF()">📥 Download PDF</button>
+    </div>
+
+    <div class="content" id="dashboardContent">
+        <h1>📊 Manager Reports Dashboard</h1>
+
+        <div class="card">
+            <h2>Today's Occupancy</h2>
+            <div id="occupancy">Loading...</div>
+        </div>
+
+        <div class="card">
+            <h2>Projected Future Occupancy</h2>
+            <canvas id="projectedChart"></canvas>
+        </div>
+
+        <div class="card" id="financialReport">
+            <h2>Financial Summary</h2>
+            <div id="financial">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        async function loadOccupancy() {
+            const res = await fetch('/api/reports/occupancy');
+            const data = await res.json();
+            document.getElementById('occupancy').innerText = 
+                `Total Rooms: ${data.total_rooms}, Occupied: ${data.occupied_rooms}`;
+        }
+
+        async function loadProjected() {
+            const res = await fetch('/api/reports/projected');
+            const data = await res.json();
+            const labels = data.map(d => d.date);
+            const counts = data.map(d => d.bookings);
+
+            new Chart(document.getElementById('projectedChart'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Projected Bookings',
+                        data: counts,
+                        borderColor: 'rgba(75,192,192,1)',
+                        backgroundColor: 'rgba(75,192,192,0.2)',
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 4,
+                        pointBackgroundColor: 'rgba(75,192,192,1)',
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: { enabled: true }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { grid: { color: '#eee' } }
+                    }
+                }
+            });
+        }
+
+        async function loadFinancial() {
+            const start = document.getElementById('startDate').value;
+            const end = document.getElementById('endDate').value;
+            let url = '/api/reports/financial';
+            if (start && end) {
+                url += `?start_date=${start}&end_date=${end}`;
+            }
+            const res = await fetch(url);
+            const data = await res.json();
+            document.getElementById('financial').innerText = 
+                `Total Revenue: $${data.total_revenue || 0}`;
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('dashboardContent');
+            html2pdf().from(element).save('manager_dashboard.pdf');
+        }
+
+        // Initial load
+        loadOccupancy();
+        loadProjected();
+        loadFinancial();
+    </script>
+</body>
+</html>
+
+
+

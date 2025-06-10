@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Company Portal</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+        input, button { margin: 10px 0; padding: 6px; }
+        section { background: white; padding: 20px; border-radius: 6px; box-shadow: 0 0 5px #aaa; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <section>
+        <h2>Register Travel Company</h2>
+        <input type="text" id="companyName" placeholder="Company Name"><br>
+        <input type="email" id="companyEmail" placeholder="Contact Email"><br>
+        <input type="number" id="companyDiscount" placeholder="Discount %" value="10"><br>
+        <button onclick="registerCompany()">Register</button>
+    </section>
+
+    <section>
+        <h2>Block Rooms</h2>
+        <form id="blockForm">
+            <label>Company ID: <input type="number" id="companyId" required></label><br>
+            <label>Number of Rooms: <input type="number" id="roomCount" required></label><br>
+            <label>Arrival: <input type="date" id="arrivalDate" required></label><br>
+            <label>Departure: <input type="date" id="departureDate" required></label><br>
+            <button type="submit">Block Rooms</button>
+        </form>
+    </section>
+
+    <script>
+        async function registerCompany() {
+            const name = document.getElementById('companyName').value;
+            const email = document.getElementById('companyEmail').value;
+            const discount = document.getElementById('companyDiscount').value;
+            const res = await fetch('/api/register-company', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, discount })
+            });
+            const data = await res.json();
+            alert(data.message);
+        }
+
+        document.getElementById('blockForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const companyId = document.getElementById('companyId').value;
+            const roomCount = parseInt(document.getElementById('roomCount').value);
+            const arrival = document.getElementById('arrivalDate').value;
+            const departure = document.getElementById('departureDate').value;
+
+            const reservations = [];
+            for (let i = 0; i < roomCount; i++) {
+                reservations.push({
+                    room_id: 1,  // In production, dynamically select available room
+                    room_type: 'Deluxe',
+                    num_guests: 2,
+                    arrival_date: arrival,
+                    departure_date: departure
+                });
+            }
+
+            const res = await fetch('/api/reserve-block', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ company_id: companyId, reservations })
+            });
+            const data = await res.json();
+            alert(data.message);
+        };
+    </script>
+</body>
+</html>
+
